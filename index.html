@@ -1,99 +1,620 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Undian Pulsa Gratis Mingguan</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Undian Pulsa Gratis Mingguan — Dengan Testimoni Facebook</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
 <style>
+  :root{
+    --fb-blue:#1877f2;
+    --muted:#666;
+    --accent:#2e89ff;
+  }
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     background: linear-gradient(180deg, #ff0000 0%, #ffcc00 50%, #0066ff 100%);
     color: #fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
   }
+
+  /* CENTRAL CONTAINER (ke seluruh halaman) */
   .container {
     max-width: 480px;
-    margin: auto;
-    padding: 20px;
+    margin: 18px auto;
+    padding: 18px;
     text-align: center;
   }
+
+  /* UNDian Header (ke original style) */
   h1 {
     font-size: 26px;
-    margin-top: 20px;
-    font-weight: bold;
+    font-weight: 700;
+    margin: 6px 0 10px;
+    color: #fff;
   }
-  p {
+  p.lead {
     font-size: 15px;
-    margin-bottom: 20px;
+    margin: 0 0 14px;
+    color: #fff;
   }
-  input {
+
+  input, button {
     width: 100%;
+    box-sizing: border-box;
+  }
+
+  input {
     padding: 14px;
-    margin: 10px 0;
+    margin: 8px 0;
     border: none;
     border-radius: 10px;
     font-size: 16px;
   }
-  button {
-    width: 100%;
-    padding: 16px;
+
+  button.primary {
+    padding: 14px;
+    margin-top: 6px;
     background: #ffcc00;
     border: none;
     border-radius: 12px;
-    font-size: 18px;
+    font-size: 17px;
     color: #000;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
-  }
-  .sponsor-box {
-    margin-top: 40px;
-    padding: 18px;
-    background: rgba(255,255,255,0.85);
-    color: #000;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .sponsor-box:hover {
-    background: #fff;
   }
 
-  /* MOBILE RESPONSIVE */
-  @media (max-width: 480px) {
-    h1 { font-size: 24px; }
-    p { font-size: 14px; }
-    input { font-size: 15px; padding: 12px; }
-    button { font-size: 17px; padding: 15px; }
-    .sponsor-box { font-size: 14px; padding: 15px; }
+  /* sponsor box */
+  .sponsor-box {
+    margin-top: 18px;
+    padding: 12px;
+    background: rgba(255,255,255,0.95);
+    color: #000;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .sponsor-box img { width:100%; border-radius:8px; display:block; }
+
+  /* small note */
+  .small-note { font-size:13px; color: rgba(255,255,255,0.95); margin-top:8px; }
+
+  /* Separator */
+  .sep { height:14px; }
+
+  /* ===== FACEBOOK-LIKE FEED (ke width 480) ===== */
+  .fb-area {
+    max-width: 480px;
+    margin: 0 auto 40px;
+    text-align: left;
+  }
+
+  .fb-top {
+    background: var(--fb-blue);
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .fb-top .logo { font-size:18px; letter-spacing:1px; }
+  .fb-top .search {
+    margin-left:auto;
+    background:rgba(255,255,255,0.14);
+    padding:6px 10px; border-radius:16px; font-size:13px; color:#f1f1f1;
+  }
+
+  .fb-card {
+    background: #fff;
+    color: #111;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top:12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .fb-head { display:flex; gap:10px; align-items:center; }
+  .fb-head img{ width:48px; height:48px; border-radius:50%; }
+  .fb-name{ font-weight:700; font-size:15px; }
+  .fb-time{ font-size:12px; color:var(--muted); }
+
+  .fb-content { margin-top:10px; background:#f0f2f5; padding:10px; border-radius:10px; font-size:15px; color:#111; line-height:1.45; }
+
+  .fb-media { width:100%; border-radius:10px; margin-top:10px; }
+
+  .fb-actions { display:flex; justify-content:space-between; align-items:center; margin-top:10px; border-top:1px solid #eee; padding-top:8px; color:var(--muted); font-size:14px; }
+  .fb-actions .left { display:flex; gap:8px; align-items:center; }
+  .fb-actions .btn { cursor:pointer; padding:6px 10px; border-radius:8px; user-select:none; }
+
+  .reactions-popup{ position:absolute; display:none; gap:8px; background:#fff; padding:6px 8px; border-radius:30px; box-shadow:0 6px 18px rgba(0,0,0,0.12); transform:translateY(-8px); }
+
+  .comments { margin-top:10px; }
+  .comment { display:flex; gap:8px; align-items:flex-start; margin-top:8px; }
+  .comment img{ width:34px; height:34px; border-radius:50%; }
+  .comment .bubble { background:#f0f2f5; padding:8px 10px; border-radius:10px; font-size:14px; color:#111; }
+
+  .add-comment { display:flex; gap:8px; align-items:center; margin-top:8px; }
+  .add-comment input { flex:1; padding:10px 12px; border-radius:20px; border:1px solid #e6e6e6; }
+
+  /* ===== SLIDER (width 480) ===== */
+  .slider-box {
+    max-width:480px;
+    margin:18px auto 80px;
+    background:#fff;
+    padding:12px;
+    border-radius:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  .slider-wrapper { display:flex; width:1000%; animation: slide 30s infinite linear; }
+  .slide { min-width:100%; box-sizing:border-box; padding:8px; }
+  .slide .slide-content { background:#f0f2f5; padding:12px; border-radius:10px; font-size:15px; color:#111; }
+
+  @keyframes slide {
+    0% { transform: translateX(0); }
+    10% { transform: translateX(0); }
+    20% { transform: translateX(-100%); }
+    30% { transform: translateX(-100%); }
+    40% { transform: translateX(-200%); }
+    50% { transform: translateX(-200%); }
+    60% { transform: translateX(-300%); }
+    70% { transform: translateX(-300%); }
+    80% { transform: translateX(-400%); }
+    90% { transform: translateX(-400%); }
+    100% { transform: translateX(0); }
+  }
+
+  /* responsive tweaks */
+  @media (max-width:480px){
+    .container{ padding:14px; }
+    .fb-top{ padding:8px; }
+    .fb-card{ padding:10px; }
   }
 </style>
 </head>
 <body>
+
 <div class="container">
 
+  <!-- ORIGINAL UND IAN FORM -->
   <h1>UNDlAN PULSA GRATIS<br>SETIAP MINGGU!</h1>
-  <p>Isi data kamu sekarang dan menangkan pulsa hingga 50.000 setiap minggu!</p>
+  <p class="lead">Isi data kamu sekarang dan menangkan pulsa hingga 50.000 setiap minggu!</p>
 
   <input type="text" id="nama" placeholder="Nama Lengkap">
   <input type="text" id="hp" placeholder="Nomor HP">
-  <button onclick="kirim()">IKUTI UNDIAN</button>
+  <button class="primary" onclick="kirim()">IKUTI UNDIAN</button>
 
-  <div style="text-align:center; margin:25px 0;">
-  <h3>Pasang Sticker mobil? Klik Gambar berikut</h3>
+  <div style="text-align:center; margin:18px 0;">
+    <h3 style="color:#fff; margin:10px 0 8px;">Pasang Sticker mobil? Klik Gambar berikut</h3>
 
-  <a href="https://wa.me/6281313115162?text=Halo%20saya%20mau%20pasang%20stiker%20mobil" target="_blank">
-    <img 
-      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8ZwZ0Uh__vwN0WdOuxey5uows4j4AlwHoI1HTAlpAQDob0tbmAi3SrnJlwkTBddjMibCwueTrTGXnxUonhX-aAmllQDZce123xUYBO0eg1p-1JxQZiLlqZGkiNYjk0cWpNM7f022Ssp8RggGUYx79_p-qWvF9B9-E3IxyVmUv0U_ImHIStlw4-hr5gug/s320/WhatsApp%20Image%202025-11-29%20at%2021.24.08_38a317ef.jpg"
-      alt="Sticker Mobil" 
-      style="width:280px; border-radius:12px; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3);"
-    >
-  </a>
-</div>
+    <a href="https://wa.me/6281313115162?text=Halo%20saya%20mau%20pasang%20stiker%20mobil" target="_blank" style="display:inline-block; width:100%; max-width:320px; margin:0 auto;">
+      <img 
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8ZwZ0Uh__vwN0WdOuxey5uows4j4AlwHoI1HTAlpAQDob0tbmAi3SrnJlwkTBddjMibCwueTrTGXnxUonhX-aAmllQDZce123xUYBO0eg1p-1JxQZiLlqZGkiNYjk0cWpNM7f022Ssp8RggGUYx79_p-qWvF9B9-E3IxyVmUv0U_ImHIStlw4-hr5gug/s320/WhatsApp%20Image%202025-11-29%20at%2021.24.08_38a317ef.jpg"
+        alt="Sticker Mobil" 
+        style="width:100%; border-radius:12px; cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3);"
+      >
+    </a>
+  </div>
 
+  <div class="sponsor-box">
+    <div style="font-size:15px; text-align:left; color:#000; font-weight:700;">Sponsor: Pasundan Digital Printing</div>
+    <div style="font-size:13px; color:#222; margin-top:8px; text-align:left;">
+      Klik banner untuk chat pemasangan stiker.
+    </div>
+  </div>
 
-</div>
+  <div class="sep"></div>
+
+  <!-- ===== FACEBOOK AREA (width same as container) ===== -->
+  <div class="fb-area">
+
+    <div class="fb-top">
+      <div class="logo">facebook</div>
+      <div class="search">Cari</div>
+    </div>
+
+    <!-- post 1 (with media) -->
+    <div class="fb-card" id="post-1" data-post-id="1">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=1" alt="">
+        <div>
+          <div class="fb-name">Rudi Firmansyah</div>
+          <div class="fb-time">2 jam lalu · Bandung</div>
+        </div>
+      </div>
+      <div class="fb-content">Alhamdulillah pulsa 25.000 beneran masuk. Terima kasih Pasundan Pulsa!</div>
+      <img class="fb-media" src="https://picsum.photos/seed/pulsa1/600/300" alt="media">
+
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">124</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',1)">👍</div>
+              <div class="reaction" onclick="react(event,'love',1)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',1)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',1)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',1)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">32</span></div>
+          <div class="btn share" onclick="sharePost(1)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">32 Komentar · 12 Dibagikan</div>
+      </div>
+
+      <div class="comments" id="comments-1">
+        <div class="comment">
+          <img src="https://i.pravatar.cc/50?img=22">
+          <div class="bubble"><strong>Nisa:</strong> Mantap, saya juga dapat 😍</div>
+        </div>
+
+        <div class="comment">
+          <img src="https://i.pravatar.cc/50?img=45">
+          <div class="bubble"><strong>Dede:</strong> Ikut lagi minggu ini!</div>
+        </div>
+
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(1,this.value);">
+          <button class="btn" onclick="addComment(1, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- post 2 -->
+    <div class="fb-card" id="post-2" data-post-id="2">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=2" alt="">
+        <div>
+          <div class="fb-name">Nisa Cahyaningrum</div>
+          <div class="fb-time">5 jam lalu · Ciamis</div>
+        </div>
+      </div>
+      <div class="fb-content">Programnya simple: isi form, share, tunggu undian. Aku dapet pulsa 50.000 minggu lalu 😍</div>
+
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">98</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',2)">👍</div>
+              <div class="reaction" onclick="react(event,'love',2)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',2)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',2)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',2)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">16</span></div>
+          <div class="btn share" onclick="sharePost(2)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">16 Komentar</div>
+      </div>
+
+      <div class="comments" id="comments-2">
+        <div class="comment">
+          <img src="https://i.pravatar.cc/50?img=33">
+          <div class="bubble"><strong>Widia:</strong> Wah selamat! 😍</div>
+        </div>
+
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(2,this.value);">
+          <button class="btn" onclick="addComment(2, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- posts 3..10 simplified -->
+    <!-- 3 -->
+    <div class="fb-card" id="post-3" data-post-id="3">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=3" alt="">
+        <div>
+          <div class="fb-name">Dede Saputra</div>
+          <div class="fb-time">Kemarin · Tasikmalaya</div>
+        </div>
+      </div>
+      <div class="fb-content">Saya menang di undian hari Minggu — beneran masuk pulsanya.</div>
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">44</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',3)">👍</div>
+              <div class="reaction" onclick="react(event,'love',3)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',3)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',3)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',3)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">8</span></div>
+          <div class="btn share" onclick="sharePost(3)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">8 Komentar</div>
+      </div>
+      <div class="comments" id="comments-3">
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(3,this.value);">
+          <button class="btn" onclick="addComment(3, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="fb-card" id="post-4" data-post-id="4">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=4" alt="">
+        <div>
+          <div class="fb-name">Widia Marlina</div>
+          <div class="fb-time">1 hari · Garut</div>
+        </div>
+      </div>
+      <div class="fb-content">Udah 2x ikut, dan sekali menang. Lumayan buat beli kuota.</div>
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">37</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',4)">👍</div>
+              <div class="reaction" onclick="react(event,'love',4)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',4)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',4)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',4)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">5</span></div>
+          <div class="btn share" onclick="sharePost(4)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">5 Komentar</div>
+      </div>
+      <div class="comments" id="comments-4">
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(4,this.value);">
+          <button class="btn" onclick="addComment(4, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="fb-card" id="post-5" data-post-id="5">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=5" alt="">
+        <div>
+          <div class="fb-name">Agus Prayoga</div>
+          <div class="fb-time">2 hari · Sumedang</div>
+        </div>
+      </div>
+      <div class="fb-content">Prosesnya cepat, ga ribet. Recommended pokoknya!</div>
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">28</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',5)">👍</div>
+              <div class="reaction" onclick="react(event,'love',5)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',5)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',5)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',5)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">4</span></div>
+          <div class="btn share" onclick="sharePost(5)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">4 Komentar</div>
+      </div>
+      <div class="comments" id="comments-5">
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(5,this.value);">
+          <button class="btn" onclick="addComment(5, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="fb-card" id="post-6" data-post-id="6">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=6" alt="">
+        <div>
+          <div class="fb-name">Iis Marliani</div>
+          <div class="fb-time">3 hari · Subang</div>
+        </div>
+      </div>
+      <div class="fb-content">Pas banget lagi butuh pulsa, eh menang undian hari itu 😄.</div>
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">20</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',6)">👍</div>
+              <div class="reaction" onclick="react(event,'love',6)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',6)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',6)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',6)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">6</span></div>
+          <div class="btn share" onclick="sharePost(6)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">6 Komentar</div>
+      </div>
+      <div class="comments" id="comments-6">
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(6,this.value);">
+          <button class="btn" onclick="addComment(6, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="fb-card" id="post-7" data-post-id="7">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=7" alt="">
+        <div>
+          <div class="fb-name">Budi Setiadi</div>
+          <div class="fb-time">4 hari · Cimahi</div>
+        </div>
+      </div>
+      <div class="fb-content">Saya ikut buat iseng, malah beneran menang haha.</div>
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">12</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',7)">👍</div>
+              <div class="reaction" onclick="react(event,'love',7)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',7)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',7)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',7)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">2</span></div>
+          <div class="btn share" onclick="sharePost(7)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">2 Komentar</div>
+      </div>
+      <div class="comments" id="comments-7">
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(7,this.value);">
+          <button class="btn" onclick="addComment(7, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="fb-card" id="post-8" data-post-id="8">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=8" alt="">
+        <div>
+          <div class="fb-name">Mega Sari</div>
+          <div class="fb-time">5 hari · Sukabumi</div>
+        </div>
+      </div>
+      <div class="fb-content">Halaman daftar gampang diisi, tinggal nunggu hasil undian.</div>
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">15</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',8)">👍</div>
+              <div class="reaction" onclick="react(event,'love',8)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',8)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',8)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',8)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">3</span></div>
+          <div class="btn share" onclick="sharePost(8)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">3 Komentar</div>
+      </div>
+      <div class="comments" id="comments-8">
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(8,this.value);">
+          <button class="btn" onclick="addComment(8, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="fb-card" id="post-9" data-post-id="9">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=9" alt="">
+        <div>
+          <div class="fb-name">Heri Sopandi</div>
+          <div class="fb-time">6 hari · Karawang</div>
+        </div>
+      </div>
+      <div class="fb-content">Baru pertama ikut, ternyata hoki. Pulsa masuk 10 menit setelah pengumuman.</div>
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">9</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',9)">👍</div>
+              <div class="reaction" onclick="react(event,'love',9)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',9)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',9)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',9)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">1</span></div>
+          <div class="btn share" onclick="sharePost(9)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">1 Komentar</div>
+      </div>
+      <div class="comments" id="comments-9">
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(9,this.value);">
+          <button class="btn" onclick="addComment(9, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="fb-card" id="post-10" data-post-id="10">
+      <div class="fb-head">
+        <img src="https://i.pravatar.cc/150?img=10" alt="">
+        <div>
+          <div class="fb-name">Rina Aprillia</div>
+          <div class="fb-time">1 minggu · Purwakarta</div>
+        </div>
+      </div>
+      <div class="fb-content">Undiannya amanah. Adminnya cepat respon juga.</div>
+      <div class="fb-actions">
+        <div class="left">
+          <div class="btn like" onclick="toggleLike(this)" onmouseenter="showReactions(event,this)" onmouseleave="hideReactions(event,this)">👍 <span class="like-count">21</span>
+            <div class="reactions-popup" style="left:60px; top:-48px;">
+              <div class="reaction" onclick="react(event,'like',10)">👍</div>
+              <div class="reaction" onclick="react(event,'love',10)">❤️</div>
+              <div class="reaction" onclick="react(event,'wow',10)">😮</div>
+              <div class="reaction" onclick="react(event,'haha',10)">😆</div>
+              <div class="reaction" onclick="react(event,'sad',10)">😢</div>
+            </div>
+          </div>
+          <div class="btn comment-btn" onclick="focusComment(this)">💬 <span class="c-count">7</span></div>
+          <div class="btn share" onclick="sharePost(10)">↗ Bagikan</div>
+        </div>
+        <div class="right" style="font-size:13px; color:var(--muted)">7 Komentar</div>
+      </div>
+      <div class="comments" id="comments-10">
+        <div class="add-comment">
+          <img src="https://i.pravatar.cc/50?img=56" style="width:36px;height:36px;border-radius:50%">
+          <input placeholder="Tulis komentar..." onkeydown="if(event.key==='Enter') addComment(10,this.value);">
+          <button class="btn" onclick="addComment(10, this.previousElementSibling.value)">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- end fb-area -->
+
+  <!-- SLIDER (width same as container) -->
+  <div class="slider-box">
+    <div style="font-weight:700; margin-bottom:8px;">Testimoni Slide</div>
+    <div class="slider-wrapper">
+      <div class="slide"><div class="slide-content">Rudi – “Pulsa langsung masuk dalam hitungan menit!”</div></div>
+      <div class="slide"><div class="slide-content">Nisa – “Programnya real, bukan hoax.”</div></div>
+      <div class="slide"><div class="slide-content">Dede – “Saya menang di undian hari Minggu.”</div></div>
+      <div class="slide"><div class="slide-content">Widia – “2x ikut, sekali menang. Mantap!”</div></div>
+      <div class="slide"><div class="slide-content">Agus – “Cara ikutnya gampang banget.”</div></div>
+      <div class="slide"><div class="slide-content">Iis – “Waktu butuh pulsa, malah menang undian.”</div></div>
+      <div class="slide"><div class="slide-content">Budi – “Iseng-iseng berhadiah ternyata beneran.”</div></div>
+      <div class="slide"><div class="slide-content">Mega – “Tampilan websitenya simple dan cepat.”</div></div>
+      <div class="slide"><div class="slide-content">Heri – “Pulsa masuk 10 menit setelah diundi.”</div></div>
+      <div class="slide"><div class="slide-content">Rina – “Admin ramah, undiannya jujur.”</div></div>
+    </div>
+  </div>
+
+</div> <!-- end main container -->
+
+<!-- Toast (simple) -->
+<div id="toast" style="position:fixed; right:14px; bottom:14px; background:#111; color:#fff; padding:10px 12px; border-radius:8px; display:none; z-index:9999;"></div>
 
 <script>
+/* ===== FORM SUBMIT (original kirim) ===== */
 function kirim() {
   let nama = document.getElementById('nama').value.trim();
   let hp = document.getElementById('hp').value.trim();
@@ -116,7 +637,7 @@ function kirim() {
           alert("Pendaftaran berhasil! Bagikan ke 5 teman agar valid.");
           setTimeout(function(){
               window.location.href = "https://wa.me/?text=" + encodeURIComponent(pesan);
-          }, 1200);
+          }, 900);
       } else {
           alert("Gagal: " + txt);
       }
@@ -126,10 +647,70 @@ function kirim() {
       alert("Error koneksi! Pastikan URL Google Script benar.");
   });
 }
-</script>
 
+/* ===== FB-LIKE FEED INTERACTIONS (light) ===== */
+function toggleLike(el){
+  el.classList.toggle('active');
+  const span = el.querySelector('.like-count');
+  let val = parseInt(span.textContent||"0");
+  if(el.classList.contains('active')) val++;
+  else val = Math.max(0, val-1);
+  span.textContent = val;
+}
+
+function showReactions(e, el){
+  const popup = el.querySelector('.reactions-popup');
+  if(!popup) return;
+  popup.style.display = 'flex';
+}
+function hideReactions(e, el){
+  const popup = el.querySelector('.reactions-popup');
+  if(!popup) return;
+  popup.style.display = 'none';
+}
+function react(e,type,postId){
+  e.stopPropagation();
+  const el = document.querySelector('#post-'+postId+' .like .like-count');
+  if(el){ el.textContent = parseInt(el.textContent||"0")+1; }
+  showToast('Bereaksi: '+type);
+  document.querySelectorAll('.reactions-popup').forEach(p=>p.style.display='none');
+}
+
+/* comments */
+function addComment(postId, text){
+  if(!text || !text.trim()) return;
+  const area = document.getElementById('comments-'+postId);
+  const div = document.createElement('div');
+  div.className = 'comment';
+  div.innerHTML = `<img src="https://i.pravatar.cc/50?img=56"><div class="bubble"><strong>Kamu:</strong> ${escapeHtml(text)}</div>`;
+  const addRow = area.querySelector('.add-comment');
+  area.insertBefore(div, addRow);
+  addRow.querySelector('input').value = '';
+  const ccount = document.querySelector('#post-'+postId+' .c-count');
+  if(ccount) ccount.textContent = parseInt(ccount.textContent||"0")+1;
+}
+function escapeHtml(s){ return s.replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]) }); }
+function focusComment(btn){
+  const post = btn.closest('.fb-card');
+  const input = post.querySelector('.add-comment input');
+  if(input){ input.focus(); }
+}
+
+/* share via WA */
+function sharePost(id){
+  const pesan = encodeURIComponent('Lihat testimoni peserta undian pulsa — cek sekarang: https://pasundan-pulsa.github.io/undian/');
+  window.open('https://wa.me/?text='+pesan, '_blank');
+}
+
+/* toast */
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=> t.style.display='none', 2400);
+}
+</script>
 
 </body>
 </html>
-
-
