@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undian Pulsa Gratis Mingguan</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #ff0000 0%, #ffcc00 50%, #0066ff 100%);
+    color: #fff;
+  }
+  .container {
+    max-width: 480px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 26px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  p {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  input {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  button {
+    width: 100%;
+    padding: 16px;
+    background: #ffcc00;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .sponsor-box {
+    margin-top: 40px;
+    padding: 18px;
+    background: rgba(255,255,255,0.85);
+    color: #000;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .sponsor-box:hover {
+    background: #fff;
+  }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 480px) {
+    h1 { font-size: 24px; }
+    p { font-size: 14px; }
+    input { font-size: 15px; padding: 12px; }
+    button { font-size: 17px; padding: 15px; }
+    .sponsor-box { font-size: 14px; padding: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>UNDlAN PULSA GRATIS<br>SETIAP MINGGU!</h1>
+  <p>Isi data kamu sekarang dan menangkan pulsa hingga 50.000 setiap minggu!</p>
+
+  <input type="text" id="nama" placeholder="Nama Lengkap">
+  <input type="text" id="hp" placeholder="Nomor HP">
+  <button onclick="kirim()">IKUTI UNDIAN</button>
+
+  <div class="sponsor-box" onclick="window.location.href='https://wa.me/6281313115162'">
+    Disponsori oleh<br>
+    <b>Pasundan Digital Printing</b><br>
+    Klik untuk WhatsApp Sponsor
+  </div>
+
+</div>
+
+<script>
+function kirim() {
+  let nama = document.getElementById('nama').value.trim();
+  let hp = document.getElementById('hp').value.trim();
+
+  if (!nama || !hp) {
+    alert("Nama dan Nomor HP wajib diisi!");
+    return;
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycbx1Mm5ub_55-wZGMSndlttbFusqkWcRZhen1pICsRkX9756cMUJvCuMHFXq3VVIG6sePg/exec", {
+    method: "POST",
+    body: JSON.stringify({ nama: nama, hp: hp })
+  })
+  .then(res => res.text())
+  .then(txt => {
+      console.log("Response:", txt);
+
+      if (txt === "OK") {
+          let pesan = "Ikuti Undian Pulsa GRATIS! Diundi setiap minggu! Daftar di sini: https://yourlandingpage.com";
+          alert("Pendaftaran berhasil! Bagikan ke 5 teman agar valid.");
+          setTimeout(function(){
+              window.location.href = "https://wa.me/?text=" + encodeURIComponent(pesan);
+          }, 1200);
+      } else {
+          alert("Gagal: " + txt);
+      }
+  })
+  .catch(err => {
+      console.log(err);
+      alert("Error koneksi! Pastikan URL Google Script benar.");
+  });
+}
+</script>
+
+
+</body>
+</html>
